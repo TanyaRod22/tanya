@@ -1,25 +1,37 @@
 pipeline {
-    agent any 
-    stages {
-        stage('This is the First phase') {
-            steps {
-                echo 'Hello my name is Tanya Rodrigues' 
-            }
+  agent any
+  stages {
+    stage('Form') {
+      input {
+        message "Please fill this form"
+        parameters {
+          string(name: 'PERSON', defaultValue: '', description: 'Your Name: ')
+          booleanParam(name: 'STUDENT', defaultValue: true, description: 'Student')
+          choice(name: 'DIVISION', choices: ['A', 'B'], description: 'Pick division')
+          text(name: 'PID', defaultValue: '', description: 'Enter your PID')
         }
-        stage('Second Phase') {
-            steps {
-                echo 'My Roll No. is 36' 
-            }
-        }
-        stage('Third Phase') {
-            steps {
-                echo 'Class is BE-IT A' 
-            }
-        }
-        stage('Fourth Phase') {
-            steps {
-                echo 'This is my DOL viva File' 
-            }
-        }
+      }
+      steps {
+        echo "Hello, ${params.PERSON}"
+        echo "Toggle: ${params.STUDENT}"
+        echo "Choice: ${params.DIVISION}"
+        echo "PID: ${params.PID}"
+      }
     }
+    stage('info') {
+            steps {
+                echo 'This was your information'
+            }
+        }
+    stage('Bye') {
+            steps {
+                echo 'Bye'
+            }
+        }
+  }
+  post {
+    failure {
+      echo 'The build was unsuccessful, try again later.'
+    }
+  }
 }
