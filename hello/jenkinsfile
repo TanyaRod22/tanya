@@ -1,0 +1,25 @@
+pipeline {
+    agent any 
+    stages {
+        stage('This is the First phase') {
+            steps {
+                echo 'Hello my name is Tanya Rodrigues' 
+            }
+        }
+        stage('Second Phase') {
+            steps {
+                echo 'My Roll No. is 36' 
+            }
+        }
+        stage('Third Phase') {
+            steps {
+                echo 'Class is BE-IT A' 
+            }
+        }
+        stage('Fourth Phase') {
+            steps {
+                echo 'This is my DOL viva File' 
+            }
+        }
+    }
+}
